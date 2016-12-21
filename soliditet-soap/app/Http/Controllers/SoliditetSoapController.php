@@ -7,20 +7,22 @@ use BeSimple\SoapClient\SoapClient AS SoapClient;
 use BeSimple\SoapClient\SoapRequest AS SoapRequest;
 
 
-class SolidetSoapController extends BaseController
+
+class SoliditetSoapController extends BaseController
 {
     //
-    function getReport($request){
-        if($request->isMethod == 'post'){
+    function getReport(){
+        echo 'here';
+        //if($request->isMethod('post')){
             $simpleClient = new SoapClient('https://webservice.soliditet.se/brg/services/NBKReportServiceSmall?wsdl');
 
             $identity = new \stdClass();
             $identity->user = env('APP_USERNAME');
             $identity->password = env('APP_PASSWORD');
 
-            $includeEmptyFields = new SoapHeader('brg','includeEmptyFields',TRUE, false);
-            $includeFieldDisplayName = new SoapHeader('brg','includeFieldDisplayName',TRUE, false);
-            $fieldDisplayNameLanguage = new SoapHeader('brg','fieldDisplayNameLanguage','SE', false);
+            $includeEmptyFields = new \SoapHeader('brg','includeEmptyFields','true', false);
+            $includeFieldDisplayName = new \SoapHeader('brg','includeFieldDisplayName','true', false);
+            $fieldDisplayNameLanguage = new \SoapHeader('brg','fieldDisplayNameLanguage','sv', false);
 
             $simpleClient->__setSoapHeaders(array($includeEmptyFields,$includeFieldDisplayName,$fieldDisplayNameLanguage));
 
@@ -28,9 +30,14 @@ class SolidetSoapController extends BaseController
             $nBKReportServiceSmallRequest = new \stdClass;
             $nBKReportServiceSmallRequest->identity = $identity;
 
+            $nBKVar = new \SoapVar($nBKReportServiceSmallRequest, SOAP_ENC_OBJECT, 'nBKReportServiceSmallRequest');
 
-            $simpleRequest = new SoapRequest($nBKReportServiceSmallRequest, $request->input('location'), $request->input('action'), $request->input('version') );
+            return $simpleClient->__doRequest($nBKVar, 'https://webservice.soliditet.se/brg/services/NBKReportServiceSmall', 'request', '1' );
+
+
+
+
 
         }
-    }
+   // }
 }

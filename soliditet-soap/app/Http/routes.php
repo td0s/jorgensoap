@@ -15,6 +15,5 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
-$app->post('report', [
-    'as' => 'report', 'uses' => 'SolidetSoapController@getReport'
+$app->get('report', ['uses' => 'SoliditetSoapController@getReport'
 ]);
