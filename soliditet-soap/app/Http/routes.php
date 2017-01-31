@@ -17,3 +17,6 @@ $app->get('/', function () use ($app) {
 
 $app->get('/report', ['uses' => 'SoliditetSoapController@getReport'
 ]);
+$app->get('/phpinfo', function(){
+    return phpinfo();
+});
