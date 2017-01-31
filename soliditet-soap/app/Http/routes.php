@@ -15,5 +15,5 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
-$app->get('report', ['uses' => 'SoliditetSoapController@getReport'
+$app->get('/report', ['uses' => 'SoliditetSoapController@getReport'
 ]);
