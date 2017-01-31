@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use BeSimple\SoapClient\SoapClient AS SoapClient;
 use BeSimple\SoapClient\SoapRequest AS SoapRequest;
+use Illuminate\Http\Request;
+
 
 
 
 class SoliditetSoapController extends BaseController
 {
     //
-    function getReport()
+    function getReport(Request $request)
     {
         //echo 'here';
         //if($request->isMethod('post')){
@@ -47,7 +49,8 @@ class SoliditetSoapController extends BaseController
         $nBKReportServiceSmallRequest->reportCriteria->countries->country = 'SE';
 
         $nBKReportServiceSmallRequest->reportCriteria->criteria = new \stdClass;
-        $nBKReportServiceSmallRequest->reportCriteria->criteria->freetext = 'stockholm';
+        $nBKReportServiceSmallRequest->reportCriteria->criteria->freetext = $request->input('freetext');
+
 
         $response = $simpleClient->service($nBKReportServiceSmallRequest);
 
