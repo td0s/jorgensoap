@@ -68,7 +68,7 @@ class SoliditetSoapController extends BaseController
         var_dump($simpleClient->__getLastResponseHeaders());
         var_dump($response);
         echo '</pre>';*/
-        return '<pre>Search text: '.$request->input('freetext').'<br/>'.print_r($response, TRUE).'</pre>';
+        return json_encode($response);
 
     }
 
