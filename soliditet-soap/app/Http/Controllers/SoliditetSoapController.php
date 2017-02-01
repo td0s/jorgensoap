@@ -55,6 +55,13 @@ class SoliditetSoapController extends BaseController
 
         $response = $simpleClient->service($nBKReportServiceSmallRequest);
 
+        echo "====== REQUEST HEADERS =====" . PHP_EOL;
+        var_dump($simpleClient->__getLastRequestHeaders());
+        echo "========= REQUEST ==========" . PHP_EOL;
+        var_dump($simpleClient->__getLastRequest());
+        echo "========= RESPONSE =========" . PHP_EOL;
+        var_dump($response);
+
         return '<pre>Search text: '.$request->input('freetext').'<br/>'.print_r($response, TRUE).'</pre>';
 
     }
