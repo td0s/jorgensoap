@@ -54,7 +54,7 @@ class SoliditetSoapController extends BaseController
 
         $response = $simpleClient->service($nBKReportServiceSmallRequest);
 
-        return 'Search text: '.$request->input('freetext').print_r($response);
+        return '<pre>Search text: '.$request->input('freetext').print_r($response, TRUE).'</pre>';
 
     }
 
