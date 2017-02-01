@@ -22,7 +22,7 @@ class SoliditetSoapController extends BaseController
         $identity = new \stdClass();
         $identity->user = env('APP_USERNAME');
         $identity->password = env('APP_PASSWORD');
-        //print_r($identity);
+        print_r($identity);
 
         $includeEmptyFields = new \SoapHeader('brg', 'includeEmptyFields', 'true', false);
         $includeFieldDisplayName = new \SoapHeader('brg', 'includeFieldDisplayName', '?', false);
@@ -51,6 +51,7 @@ class SoliditetSoapController extends BaseController
         $nBKReportServiceSmallRequest->reportCriteria->criteria = new \stdClass;
         $nBKReportServiceSmallRequest->reportCriteria->criteria->freetext = $request->input('freetext');
 
+        print_r($nBKReportServiceSmallRequest);
 
         $response = $simpleClient->service($nBKReportServiceSmallRequest);
 
