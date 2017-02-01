@@ -17,12 +17,12 @@ class SoliditetSoapController extends BaseController
     {
         //echo 'here';
         //if($request->isMethod('post')){
-        $simpleClient = new SoapClient('https://webservice.soliditet.se/brg/services/NBKReportServiceSmall?wsdl', array('trace' => 1));
+        $simpleClient = new \SoapClient('https://webservice.soliditet.se/brg/services/NBKReportServiceSmall?wsdl', array('trace' => 1));
 
         $identity = new \stdClass();
         $identity->user = env('APP_USERNAME');
         $identity->password = env('APP_PASSWORD');
-        print_r($identity);
+        //print_r($identity);
 
         $includeEmptyFields = new \SoapHeader('brg', 'includeEmptyFields', 'true', false);
         $includeFieldDisplayName = new \SoapHeader('brg', 'includeFieldDisplayName', '?', false);
@@ -39,29 +39,35 @@ class SoliditetSoapController extends BaseController
         $nBKReportServiceSmallRequest->contract = new \stdClass;
 
         $nBKReportServiceSmallRequest->reportCriteria = new \stdClass;
-        $nBKReportServiceSmallRequest->reportCriteria->startPos = 0;
-        $nBKReportServiceSmallRequest->reportCriteria->pageSize = 40;
-        $nBKReportServiceSmallRequest->reportCriteria->numberOfHits = 500;
+        $nBKReportServiceSmallRequest->reportCriteria->startPos = '0';
+        $nBKReportServiceSmallRequest->reportCriteria->pageSize = '40';
+        $nBKReportServiceSmallRequest->reportCriteria->numberOfHits = '500';
         $nBKReportServiceSmallRequest->reportCriteria->buyReport = 'true';
         $nBKReportServiceSmallRequest->reportCriteria->language = 'SV';
-
         $nBKReportServiceSmallRequest->reportCriteria->countries = new \stdClass;
         $nBKReportServiceSmallRequest->reportCriteria->countries->country = 'SE';
 
         $nBKReportServiceSmallRequest->reportCriteria->criteria = new \stdClass;
-        $nBKReportServiceSmallRequest->reportCriteria->criteria->freetext = $request->input('freetext');
+        $nBKReportServiceSmallRequest->reportCriteria->criteria->freeText = $request->input('freetext');
+        //$nBKReportServiceSmallRequest->reportCriteria->criteria->smallSearch = new \stdClass();
+        //$nBKReportServiceSmallRequest->reportCriteria->criteria->smallSearch->countryRegistrationNumber = '';
 
-        print_r($nBKReportServiceSmallRequest);
+
 
         $response = $simpleClient->service($nBKReportServiceSmallRequest);
 
+        /*echo '<pre>';
+        print_r($nBKReportServiceSmallRequest);
         echo "====== REQUEST HEADERS =====" . PHP_EOL;
         var_dump($simpleClient->__getLastRequestHeaders());
         echo "========= REQUEST ==========" . PHP_EOL;
         var_dump($simpleClient->__getLastRequest());
         echo "========= RESPONSE =========" . PHP_EOL;
+        var_dump($simpleClient->__getLastResponse());
+        echo "========= RESPONSE HEADERS ==========" . PHP_EOL;
+        var_dump($simpleClient->__getLastResponseHeaders());
         var_dump($response);
-
+        echo '</pre>';*/
         return '<pre>Search text: '.$request->input('freetext').'<br/>'.print_r($response, TRUE).'</pre>';
 
     }
