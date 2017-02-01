@@ -25,8 +25,8 @@ class SoliditetSoapController extends BaseController
         //print_r($identity);
 
         $includeEmptyFields = new \SoapHeader('brg', 'includeEmptyFields', 'true', false);
-        $includeFieldDisplayName = new \SoapHeader('brg', 'includeFieldDisplayName', 'true', false);
-        $fieldDisplayNameLanguage = new \SoapHeader('brg', 'fieldDisplayNameLanguage', 'sv', false);
+        $includeFieldDisplayName = new \SoapHeader('brg', 'includeFieldDisplayName', '?', false);
+        $fieldDisplayNameLanguage = new \SoapHeader('brg', 'fieldDisplayNameLanguage', '?', false);
         //$userId = new \SoapHeader('brg','userId',env('APP_USERNAME'), false);
         //$userPassword = new \SoapHeader('brg','userPassword',env('APP_PASSWORD'), false);
 
@@ -40,9 +40,9 @@ class SoliditetSoapController extends BaseController
 
         $nBKReportServiceSmallRequest->reportCriteria = new \stdClass;
         $nBKReportServiceSmallRequest->reportCriteria->startPos = 0;
-        $nBKReportServiceSmallRequest->reportCriteria->pageSize = 50;
+        $nBKReportServiceSmallRequest->reportCriteria->pageSize = 40;
         $nBKReportServiceSmallRequest->reportCriteria->numberOfHits = 500;
-        $nBKReportServiceSmallRequest->reportCriteria->buyReport = false;
+        $nBKReportServiceSmallRequest->reportCriteria->buyReport = true;
         $nBKReportServiceSmallRequest->reportCriteria->language = 'SV';
 
         $nBKReportServiceSmallRequest->reportCriteria->countries = new \stdClass;
