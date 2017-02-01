@@ -42,7 +42,7 @@ class SoliditetSoapController extends BaseController
         $nBKReportServiceSmallRequest->reportCriteria->startPos = 0;
         $nBKReportServiceSmallRequest->reportCriteria->pageSize = 40;
         $nBKReportServiceSmallRequest->reportCriteria->numberOfHits = 500;
-        $nBKReportServiceSmallRequest->reportCriteria->buyReport = true;
+        $nBKReportServiceSmallRequest->reportCriteria->buyReport = 'true';
         $nBKReportServiceSmallRequest->reportCriteria->language = 'SV';
 
         $nBKReportServiceSmallRequest->reportCriteria->countries = new \stdClass;
